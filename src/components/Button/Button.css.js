@@ -5,17 +5,18 @@ import styled from 'styled-components';
 const RootButton = styled.button`
     color: ${({ theme, primary }) => primary? theme.colors.grey.light : theme.colors.pink.normal};
     cursor: inherit;
+    border: none;
     background-color: transparent;
     cursor: ${props => props.to || props.onClick || props.type === 'submit' ? 'pointer' : 'default'}; 
     
-    $:hover {
+    &:hover {
         opacity: .8;
     }
 `;
 
 export const InlineButton = styled(RootButton)`
     &:hover {
-        text-docaration: none;
+        text-decoration: underline;
     }
 `;
 
