@@ -21,8 +21,8 @@ function App() {
           ]} 
           RightElement = {(
             <div>
-              <Button onClick={() => i18n.changeLanguage('pl')}>PL</Button>
-              <Button onClick={() => i18n.changeLanguage('en')}>EN</Button>
+              <Button type='regular' onClick={() => i18n.changeLanguage('pl')}>PL</Button>
+              <Button type='regular' onClick={() => i18n.changeLanguage('en')}>EN</Button>
             </div>
           )}
           />

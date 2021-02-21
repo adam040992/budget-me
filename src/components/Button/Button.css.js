@@ -7,15 +7,22 @@ const RootButton = styled.button`
     cursor: inherit;
     background-color: transparent;
     cursor: ${props => props.to || props.onClick || props.type === 'submit' ? 'pointer' : 'default'}; 
+    
     $:hover {
         opacity: .8;
     }
 `;
 
-export const InlineButton = styled.button`
-
+export const InlineButton = styled(RootButton)`
+    &:hover {
+        text-docaration: none;
+    }
 `;
 
-export const RegularButton = styled.button`
-
+export const RegularButton = styled(RootButton)`
+    background-color: ${({ theme, primary }) => primary ? theme.colors.pink.normal : theme.colors.grey.light};
+    margin: ${({ theme }) => `${theme.spacing.xs / 2}px`};
+    padding: ${({ theme }) => `${theme.spacing.xs / 2}px ${theme.spacing.xs}px`};
+    border: ${({ theme }) => `2px solid ${theme.colors.pink.normal}`};
+    border-radius: 3px;
 `;

@@ -1,23 +1,27 @@
 import React from 'react';
 import { InlineButton, RegularButton } from './Button.css';
 
-const Button = ({ type }) => {
+const Button = ({ type, children, ...props }) => {
     const Component = (() => {
         switch(type) {
             case 'inline':
-                return 'InlineButton'
+                return InlineButton
             
             case 'regular':
-                return 'RegularButton'
+                return RegularButton
     
             default:
-                return 'RegularButton';
+                return RegularButton;
         }
     })();
 
     console.log(Component)
     return (
-        <div></div>
+        <div>
+            <Component {...props}>
+                {children}
+            </Component>
+        </div>
     )
 }
 
