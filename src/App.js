@@ -6,14 +6,16 @@ import theme from 'utils/theme';
 import GlobalStyles from './index.css';
 import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
-import { fetchBudget } from 'data/actions/budget.actions';
+import { fetchBudget, fetchBudgetedCategories } from 'data/actions/budget.actions';
 
 
-function App({ budget, fetchBudget }) {
+function App({ budget, fetchBudget, fetchBudgetedCategories }) {
   useEffect(() => {
-    fetchBudget(1)
-  }, [fetchBudget])
-  console.log(budget);
+    fetchBudget(1);
+    fetchBudgetedCategories(1);
+  }, [fetchBudget, fetchBudgetedCategories]);
+
+
   const { i18n } = useTranslation();
 
   return (
@@ -53,7 +55,8 @@ const ConnectedApp = connect(state => {
     budget: state.budget.budget
   }
 }, {
-  fetchBudget
+  fetchBudget,
+  fetchBudgetedCategories
 })(App)
 
 const RootApp = () => {
