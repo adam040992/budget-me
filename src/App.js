@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import { fetchBudget, fetchBudgetedCategories } from 'data/actions/budget.actions';
 
+import Budget from './pages/Budget';
 
 function App({ budget, fetchBudget, fetchBudgetedCategories }) {
   useEffect(() => {
@@ -41,7 +42,7 @@ function App({ budget, fetchBudget, fetchBudgetedCategories }) {
                 Homepage
               </Route>
               <Route path="/budget">
-                Budget page
+                {Budget}
               </Route>
             </Switch>
           </Wrapper> 
