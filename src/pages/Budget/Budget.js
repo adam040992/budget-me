@@ -1,23 +1,48 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { fetchBudget, fetchBudgetedCategories } from 'data/actions/budget.actions';
 import { connect } from 'react-redux';
 import { fetchAllCategories } from 'data/actions/common.actions';
+import { Grid } from './Budget.css';
+import { LoadingIndicator } from 'components';
 
-const Budget = ({ fetchBudget, fetchBudgetedCategories, fetchAllCategories }) => {
+const Budget = ({ 
+    commonState, budgetState, 
+    fetchBudget, fetchBudgetedCategories, fetchAllCategories }) => {
     useEffect(() => {
         fetchBudget(1);
         fetchBudgetedCategories(1);
         fetchAllCategories();
       }, [fetchBudget, fetchBudgetedCategories, fetchAllCategories]);
 
+      const isLoaded = useMemo(
+          () => (!!commonState && Object.keys(commonState).length === 0) 
+          && (!!budgetState && Object.keys(budgetState).length === 0),
+          [commonState, budgetState]
+          );
+
+          console.log(isLoaded);
+
     return (
-        <div>Budget page!</div>
+        <Grid>
+            <section>
+                {isLoaded ? 'Category List' : (
+                    <LoadingIndicator></LoadingIndicator>
+                )}
+            </section>
+            <section>
+            {isLoaded ? 'Transaction List' : (
+                    <LoadingIndicator></LoadingIndicator>
+            )}
+            </section>
+        </Grid>
     )
 }
 
 export default connect(state => {
     return {
-      budget: state.budget.budget
+      budget: state.budget.budget,
+      commonState: state.common.loadingState,
+      budgetState: state.budget.loadingState
     }
   }, {
     fetchBudget,
