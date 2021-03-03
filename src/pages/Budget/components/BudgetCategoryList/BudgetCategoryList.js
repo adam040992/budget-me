@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
+import { groupBy } from 'lodash'
 
-const BudgetCategoryList = ({  }) => {
+const BudgetCategoryList = ({ budgetedCategories, allCategories }) => {
+    const budgetedCategoriesByParent = groupBy(budgetedCategories, item => allCategories.find(category => category.id === item.categoryId).parentCategory.name);
 
-    useEffect = {
-        
-    }
-
+    console.log(budgetedCategories);
+    console.log(budgetedCategoriesByParent);
     return (
         <div>BudgetCategoryList</div>
     )
 }
 
-export default BudgetCategoryList;
+export default connect(state = ({
+    budgetedCategories: state.budget.budgetedCategories,
+    allCategories: state.common.allCategories,
+}))(BudgetCategoryList);
